@@ -5,6 +5,26 @@ metadata:
   name: manager-role
 rules:
 - apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - '*'
+- apiGroups:
+  - leaderelection.600lyy.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - leaderelection.600lyy.io
+  resources:
+  - leases/status
+  verbs:
+  - get
+- apiGroups:
   - webapp.600lyy.io
   resources:
   - guestbooks

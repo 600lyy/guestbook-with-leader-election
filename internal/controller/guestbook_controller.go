@@ -68,8 +68,10 @@ func (r *GuestbookReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 	guestBook := &webappv1.Guestbook{}
 	if err := r.Get(ctx, req.NamespacedName, guestBook); err != nil {
 		logger.Error(err, "Unable to fetch guest book in namespace", "ns", req.NamespacedName.Namespace)
-		return ctrl.Result{}, err
+		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
+
+	logger.Info("Operator is the leader: Print guest book info", "book", guestBook.Spec.Book)
 
 	return ctrl.Result{}, nil
 }
@@ -77,6 +79,7 @@ func (r *GuestbookReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 // SetupWithManager sets up the controller with the Manager.
 func (r *GuestbookReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
+		Named(controllerName).
 		For(&webappv1.Guestbook{}).
 		Complete(r)
 }
