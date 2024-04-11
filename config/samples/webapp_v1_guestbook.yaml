@@ -1,0 +1,12 @@
+apiVersion: webapp.600lyy.io/v1
+kind: Guestbook
+metadata:
+  labels:
+    app.kubernetes.io/name: guestbook
+    app.kubernetes.io/instance: guestbook-sample
+    app.kubernetes.io/part-of: guestbook-with-leader-election
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: guestbook-with-leader-election
+  name: guestbook-sample
+spec:
+  # TODO(user): Add fields here
