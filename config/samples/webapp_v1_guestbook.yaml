@@ -10,4 +10,4 @@ metadata:
   name: guestbook-sample
 spec:
   # TODO(user): Add fields here
-  book: "better life 2"
+  book: "better life 4"
